@@ -46,6 +46,11 @@ describe Game do
       expect{game.claim_field(3,3)}.to raise_error('Selection Error: This square has already be taken. Choose another square')
     end
 
+    it "Throws an error if the player chooses a row or column that isn't 1,2 or 3" do
+      game = Game.new
+      expect{game.claim_field(4,4)}.to raise_error('Selection Error: This square not on the board. Choose a square in row 1-3 and column 1-3')
+    end
+
     it "Changes the turn after each field has been claimed" do
       game = Game.new
       game.claim_field(1,1)
@@ -89,14 +94,45 @@ describe Game do
       expect(game.player_wins?).to eq true
     end
 
-    it "Is true if the bottom row is three Ys" do
+    it "Is true if the middle row is three Xs" do
+      game = Game.new
+      game.claim_field(2,1)
+      game.claim_field(1,2)
+      game.claim_field(2,2)
+      game.claim_field(1,1)
+      game.claim_field(2,3)
+      expect(game.player_wins?).to eq true
+    end
+
+    it "Is true if the bottom row is three Xs" do
+      game = Game.new
+      game.claim_field(3,1)
+      game.claim_field(2,1)
+      game.claim_field(3,2)
+      game.claim_field(2,2)
+      game.claim_field(3,3)
+      expect(game.player_wins?).to eq true
+    end
+
+    it "Is true if the middle row is three Os" do
+      game = Game.new
+      game.claim_field(3,3)
+      game.claim_field(2,1)
+      game.claim_field(1,2)
+      game.claim_field(2,2)
+      game.claim_field(1,1)
+      game.claim_field(2,3)
+      expect(game.player_wins?).to eq true
+    end
+
+    it "Is true if the first column is all Xs" do
       game = Game.new
       game.claim_field(1,1)
-      game.claim_field(3,1)
       game.claim_field(1,2)
-      game.claim_field(3,2)
       game.claim_field(2,1)
-      game.claim_field(3,3)
+      game.claim_field(2,2)
+      game.claim_field(3,1)
+      game.claim_field(2,3)
       expect(game.player_wins?).to eq true
     end
   end
