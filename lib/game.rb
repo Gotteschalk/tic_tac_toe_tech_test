@@ -19,4 +19,8 @@ attr_reader :board, :current_player
     @current_player == "X" ? @current_player = "O" : @current_player = "X"
   end
 
+  def player_wins?
+    @board[0].count("X") == 3 ? true : false
+  end
+
 end

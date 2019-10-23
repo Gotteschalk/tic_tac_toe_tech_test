@@ -73,7 +73,20 @@ describe Game do
     end
   end
 
-#   describe "#player_wins" do
-#     it ""
-#   end
+  describe "#player_wins?" do
+    it "Is false on initialization" do
+      game = Game.new
+      expect(game.player_wins?).to eq false
+    end
+
+    it "Is true if the top row is three Xs" do
+      game = Game.new
+      game.claim_field(1,1)
+      game.claim_field(2,2)
+      game.claim_field(1,2)
+      game.claim_field(2,3)
+      game.claim_field(1,3)
+      expect(game.player_wins?).to eq true
+    end
+  end
 end
