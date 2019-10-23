@@ -7,7 +7,7 @@ attr_reader :board, :turn
   end
 
   def claim_field(row, column)
-    @board = [ ["X"], [], [] ]
+    @board[row - 1].insert(column - 1, "X")
   end
 
 end
