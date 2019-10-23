@@ -39,6 +39,12 @@ describe Game do
       game.claim_field(3,3)
       expect(game.board).to eq([ [], [], [nil, nil, "X"] ])
     end
+
+    it "Throws an error if the player tries to put a mark on an occupied square" do
+      game = Game.new
+      game.claim_field(3,3)
+      expect{game.claim_field(3,3)}.to raise_error('Selection Error: This square has already be taken. Choose another square')
+    end
   end
 
   describe "#change_turns" do
