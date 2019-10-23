@@ -10,4 +10,8 @@ attr_reader :board, :turn
     @board[row - 1].insert(column - 1, "X")
   end
 
+  def change_turns
+    @turn == "X" ? @turn = "O" : @turn = "X"
+  end
+
 end

@@ -15,9 +15,9 @@ describe Game do
       expect(game.board[2]).to be_empty
     end
 
-    # it "Is the turn of X" do
-    #   expect(game.turn).to eq "X"
-    # end
+    it "Is the turn of X first" do
+      expect(game.turn).to eq "X"
+    end
   end
 
   describe "#claim_field" do
@@ -38,6 +38,17 @@ describe Game do
       game = Game.new
       game.claim_field(3,3)
       expect(game.board).to eq([ [], [], [nil, nil, "X"] ])
+    end
+  end
+
+  describe "#change_turns" do
+    it "Changes the turn from X to O" do
+      game = Game.new
+      expect(game.turn).to eq("X")
+      game.change_turns
+      expect(game.turn).to eq("O")
+      game.change_turns
+      expect(game.turn).to eq("X")
     end
   end
 end
