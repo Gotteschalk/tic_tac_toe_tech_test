@@ -20,7 +20,13 @@ attr_reader :board, :current_player
   end
 
   def player_wins?
-    @board[0].count("X") == 3 ? true : false
+    if @board[0].count("X") == 3
+      true
+    elsif @board[2].count("O") == 3
+      true
+    else
+      false
+    end
   end
 
 end

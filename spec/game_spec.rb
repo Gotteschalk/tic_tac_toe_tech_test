@@ -88,5 +88,16 @@ describe Game do
       game.claim_field(1,3)
       expect(game.player_wins?).to eq true
     end
+
+    it "Is true if the bottom row is three Ys" do
+      game = Game.new
+      game.claim_field(1,1)
+      game.claim_field(3,1)
+      game.claim_field(1,2)
+      game.claim_field(3,2)
+      game.claim_field(2,1)
+      game.claim_field(3,3)
+      expect(game.player_wins?).to eq true
+    end
   end
 end
