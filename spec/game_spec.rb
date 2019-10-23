@@ -16,7 +16,7 @@ describe Game do
     end
 
     it "Is the turn of X first" do
-      expect(game.turn).to eq "X"
+      expect(game.current_player).to eq "X"
     end
   end
 
@@ -45,16 +45,35 @@ describe Game do
       game.claim_field(3,3)
       expect{game.claim_field(3,3)}.to raise_error('Selection Error: This square has already be taken. Choose another square')
     end
+
+    it "Changes the turn after each field has been claimed" do
+      game = Game.new
+      game.claim_field(1,1)
+      expect(game.current_player).to eq("O")
+    end
+
+    it "allows alternating players to pick multiple fields and records these in the table" do
+      game = Game.new
+      game.claim_field(1,1)
+      game.claim_field(2,2)
+      game.claim_field(3,3)
+      game.claim_field(1,3)
+      expect(game.board).to eq([ ["X", nil, "O"], [nil, "O"], [nil, nil, "X"] ])
+    end
   end
 
   describe "#change_turns" do
     it "Changes the turn from X to O" do
       game = Game.new
-      expect(game.turn).to eq("X")
+      expect(game.current_player).to eq("X")
       game.change_turns
-      expect(game.turn).to eq("O")
+      expect(game.current_player).to eq("O")
       game.change_turns
-      expect(game.turn).to eq("X")
+      expect(game.current_player).to eq("X")
     end
   end
+
+#   describe "#player_wins" do
+#     it ""
+#   end
 end
